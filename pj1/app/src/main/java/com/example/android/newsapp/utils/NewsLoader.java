@@ -22,6 +22,7 @@ import java.util.List;
 public class NewsLoader extends AsyncTaskLoader<List<NewsDetail>> {
     private final String RESPONSE = "response";
     private final String RESULTS = "results";
+    private static boolean noData;
     private final String TAG = NewsLoader.class.getSimpleName();
     private URL url;
     private Context c;
@@ -55,21 +56,28 @@ public class NewsLoader extends AsyncTaskLoader<List<NewsDetail>> {
                 response = Query.makeHttpReques(url);
             }
         } catch (IOException e) {
+            noData = true;
             Log.d(TAG, e.toString());
-
-
         }
         try {
             if (response != null) {
                 JSONObject root = new JSONObject(response);
                 JSONObject resultData = root.getJSONObject(RESPONSE);
-                JSONArray results = resultData.getJSONArray(RESULTS);
+                JSONArray results;
+                switch (resultData.getString("status")) {
+                    case "ok":
+                        results = resultData.getJSONArray(RESULTS);
+                        if (null != results && results.length() > 0) {
+                            for (int i = 0; i < results.length(); i++) {
+                                JSONObject current = results.getJSONObject(i);
+                                list.add(new NewsDetail(current.getString("sectionName"), current.getString("webTitle"), current.getString("webUrl"), current.getString("webPublicationDate")));
+                            }
+                        }
+                        break;
+                    case "error":
+                        noData = true;
+                        break;
 
-                if (null != results && results.length() > 0) {
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject current = results.getJSONObject(i);
-                        list.add(new NewsDetail(current.getString("sectionName"), current.getString("webTitle"), current.getString("webUrl"), current.getString("webPublicationDate")));
-                    }
                 }
             }
 
@@ -77,6 +85,10 @@ public class NewsLoader extends AsyncTaskLoader<List<NewsDetail>> {
             Log.d(TAG, e.toString());
         }
         return list;
+    }
+
+    public static boolean getResponse() {
+        return noData;
     }
 
 }

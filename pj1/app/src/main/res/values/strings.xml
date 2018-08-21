@@ -6,6 +6,8 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
+    <string name="nodata">No data available currently</string>
+    <string name="no_data">No news available</string>
 
     <string name="slide_1_title">Read recent news Stories. Click on any item to get more information</string>
     <string name="slide_1_desc">Stories from around the world.\n Customise your feed in Settings by reading news from a particular section !</string>

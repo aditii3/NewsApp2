@@ -20,7 +20,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.example.android.newsapp.R;
 import com.example.android.newsapp.pref.NewsPreferenceActivity;
@@ -45,8 +47,10 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     private String noOfNewsItems;
     private URL url;
     private String type;
+    private TextView noText;
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
@@ -54,6 +58,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         recyclerView = findViewById(R.id.recycler_view);
         coordinatorLayout = findViewById(R.id.coordinator_layout);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        noText = findViewById(R.id.tv_no_text);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new NewsAdapter(this, this);
         recyclerView.setAdapter(adapter);
@@ -114,11 +119,16 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<List<NewsDetail>> loader, List<NewsDetail> data) {
         swipeRefreshLayout.setRefreshing(false);
-        if (data != null) {
+        if (data != null && data.size() >= 1) {
+            noText.setVisibility(View.GONE);
             adapter.clearData();
             adapter.setList(data);
             adapter.notifyDataSetChanged();
 
+        }
+        if (NewsLoader.getResponse()) {
+            noText.setVisibility(View.VISIBLE);
+            noText.setText(getString(R.string.no_data));
         }
     }
 

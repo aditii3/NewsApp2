@@ -91,6 +91,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsItemHolder
                     newsImage.setImageResource(R.drawable.ams);
             }
             newsDate.setText(list.get(index).getPublishedDate().substring(0, 10));
+
         }
 
         @Override
