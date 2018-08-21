@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:defaultValue="@string/show10"
+        android:entries="@array/pref_page_option_labels"
+        android:entryValues="@array/pref_page_option_values"
+        android:key="@string/list_page_pref_key"
+        android:summary="@string/list_page_Summary"
+        android:title="@string/list_page_title" />
+    <ListPreference
+        android:defaultValue="@string/val1"
+        android:entries="@array/pref_type_option_labels"
+        android:entryValues="@array/pref_type_option_values"
+        android:key="@string/list_order_by_pref_key"
+        android:summary="@string/list_order_summary"
+        android:title="@string/list_order_title" />
+
+
+</PreferenceScreen>

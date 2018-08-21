@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_page_option_labels">
+        <item>@string/display10</item>
+        <item>@string/display20</item>
+        <item>@string/display30</item>
+    </array>
+    <array name="pref_page_option_values">
+        <item>@string/show10</item>
+        <item>@string/show20</item>
+        <item>@string/show30</item>
+    </array>
+    <array name="pref_type_option_labels">
+        <item>@string/type1</item>
+        <item>@string/type2</item>
+        <item>@string/type3</item>
+        <item>@string/type4</item>
+    </array>
+    <array name="pref_type_option_values">
+        <item>@string/val1</item>
+        <item>@string/val2</item>
+        <item>@string/val3</item>
+        <item>@string/val4</item>
+    </array>
+</resources>
